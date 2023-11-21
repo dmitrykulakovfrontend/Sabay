@@ -5,7 +5,6 @@ import { type AppType } from "next/app";
 import { api } from "@/utils/api";
 
 import "@/styles/globals.css";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Merriweather, Lato } from "next/font/google";
 const merriweather = Merriweather({
   subsets: ["latin-ext"],
@@ -27,7 +26,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <div
-        className={`${lato.variable} ${merriweather.variable} font-lato flex min-h-screen flex-col items-center justify-center`}
+        className={`${lato.variable} ${merriweather.variable} flex min-h-screen flex-col items-center justify-center font-lato`}
       >
         <Component {...pageProps} />
       </div>

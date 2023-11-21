@@ -15,25 +15,23 @@ export default function SignIn({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div className="flex w-full max-w-sm flex-col items-center justify-center gap-12 p-8">
-      <div className="font-merriweather flex flex-col items-center justify-center gap-2">
+      <div className="flex flex-col items-center justify-center gap-2 font-merriweather">
         <Image src={logoSrc} width={100} height={200} alt="" />
       </div>
       <div>
-        {Object.values(providers).map((provider) => (
-          <div key={provider.name}>
-            <button
-              onClick={() =>
-                signIn(provider.id, {
-                  callbackUrl: "/features",
-                })
-              }
-              className="font-merriweather flex w-full gap-2 rounded-3xl  border border-slate-200 bg-zinc-300  px-4 py-2  text-xl uppercase text-black transition duration-150  hover:border-slate-400 hover:text-slate-900 hover:shadow"
-            >
-              <Image src={googleSrc as string} width={24} height={24} alt="" />
-              <span className="uppercase">{provider.name}</span>
-            </button>
-          </div>
-        ))}
+        <div>
+          <button
+            onClick={() =>
+              signIn("google", {
+                callbackUrl: "/features",
+              })
+            }
+            className="flex w-full gap-2 rounded-3xl border  border-slate-200 bg-zinc-300 px-4  py-2 font-merriweather  text-xl uppercase text-black transition duration-150  hover:border-slate-400 hover:text-slate-900 hover:shadow"
+          >
+            <Image src={googleSrc as string} width={24} height={24} alt="" />
+            <span className="uppercase">google</span>
+          </button>
+        </div>
       </div>
     </div>
   );
