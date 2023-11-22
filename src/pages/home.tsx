@@ -3,11 +3,8 @@ import Image from "next/image";
 import menu from "@/assets/mingcute-menu-fill.svg";
 import search from "@/assets/mdi-magnify.svg";
 import add from "@/assets/add.svg";
-import home from "@/assets/tabler-home.svg";
-import user from "@/assets/heroicons-user-group.svg";
-import mainMenu from "@/assets/main_menu.svg";
-import chat from "@/assets/quill-chat.svg";
-import notification from "@/assets/carbon-notification.svg";
+import Link from "next/link";
+import Footer from "@/components/Footer";
 const Home = () => {
   const [isCommunities, setCommunities] = useState(false);
   return (
@@ -75,35 +72,37 @@ const Home = () => {
           </div>
         ) : (
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <button className="flex h-32 w-32 flex-col items-center justify-evenly rounded-xl bg-zinc-300">
+            <Link
+              href={"/group"}
+              className="flex h-32 w-32 flex-col items-center justify-evenly rounded-xl bg-zinc-300"
+            >
               <Image width={70} height={70} src={add as string} alt="Add" />
               <p>Create Group</p>
-            </button>
-            <div className="h-32 w-32 rounded-xl bg-zinc-300"></div>
-            <div className="h-32 w-32 rounded-xl bg-zinc-300"></div>
-            <div className="h-32 w-32 rounded-xl bg-zinc-300"></div>
-            <div className="h-32 w-32 rounded-xl bg-zinc-300"></div>
-            <div className="h-32 w-32 rounded-xl bg-zinc-300"></div>
+            </Link>
+            <Link
+              className="h-32 w-32 rounded-xl bg-zinc-300"
+              href={"/group"}
+            ></Link>
+            <Link
+              className="h-32 w-32 rounded-xl bg-zinc-300"
+              href={"/group"}
+            ></Link>
+            <Link
+              className="h-32 w-32 rounded-xl bg-zinc-300"
+              href={"/group"}
+            ></Link>
+            <Link
+              className="h-32 w-32 rounded-xl bg-zinc-300"
+              href={"/group"}
+            ></Link>
+            <Link
+              className="h-32 w-32 rounded-xl bg-zinc-300"
+              href={"/group"}
+            ></Link>
           </div>
         )}
       </div>
-      <footer className="flex w-full items-center justify-around gap-4">
-        <button>
-          <Image width={35} height={35} src={home as string} alt="" />
-        </button>
-        <button>
-          <Image width={35} height={35} src={user as string} alt="" />
-        </button>
-        <button>
-          <Image width={65} height={65} src={mainMenu as string} alt="" />
-        </button>
-        <button>
-          <Image width={35} height={35} src={chat as string} alt="" />
-        </button>
-        <button>
-          <Image width={35} height={35} src={notification as string} alt="" />
-        </button>
-      </footer>
+      <Footer />
     </div>
   );
 };
