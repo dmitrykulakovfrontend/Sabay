@@ -11,20 +11,20 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="flex w-full items-center justify-around gap-4">
+    <footer className="fixed bottom-0 left-0 flex w-full items-center justify-around gap-4 bg-white py-2">
       <Link href={"/home"}>
         <Image width={35} height={35} src={home as string} alt="" />
       </Link>
-      <Link href={"/home"}>
+      <Link href={"/communities"}>
         <Image width={35} height={35} src={user as string} alt="" />
       </Link>
-      <Link href={"/home"}>
+      <Link href={"/spend"}>
         <Image width={65} height={65} src={mainMenu as string} alt="" />
       </Link>
-      <Link href={"/home"}>
+      <Link href={"/chat"}>
         <Image width={35} height={35} src={chat as string} alt="" />
       </Link>
-      <Link href={"/home"}>
+      <Link href={"/notification"}>
         <Image width={35} height={35} src={notification as string} alt="" />
       </Link>
     </footer>

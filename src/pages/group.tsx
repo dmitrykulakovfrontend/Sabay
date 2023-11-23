@@ -79,7 +79,7 @@ const Group = () => {
     .sort((a, b) => b.amount - a.amount);
   console.log(summary);
   return (
-    <div className="min-h-screen  w-full p-8">
+    <div className="min-h-screen  w-full p-4">
       <header className="relative flex w-full justify-center">
         <button
           className="absolute left-0 top-1/2 -translate-y-1/2"

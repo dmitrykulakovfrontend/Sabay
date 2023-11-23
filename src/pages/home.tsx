@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 const Home = () => {
   const [isCommunities, setCommunities] = useState(false);
   return (
-    <div className="flex min-h-screen w-full flex-col justify-around px-8">
+    <div className="mb-[80px] flex min-h-[calc(100vh_-_80px)] w-full flex-col gap-8 px-4">
       <div>
         <header className="flex gap-6">
           <button>
@@ -32,7 +32,7 @@ const Home = () => {
             />
           </div>
         </header>
-        <div className=" flex justify-around font-merriweather text-lg">
+        <div className=" mt-8 flex justify-around font-merriweather text-lg">
           <button
             onClick={() => setCommunities(false)}
             className={` relative uppercase ${
