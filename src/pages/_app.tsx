@@ -2,8 +2,6 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 
-import { api } from "@/utils/api";
-
 import "@/styles/globals.css";
 import { Merriweather, Lato } from "next/font/google";
 const merriweather = Merriweather({
@@ -26,7 +24,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <div
-        className={`${lato.variable} ${merriweather.variable} flex min-h-screen flex-col items-center justify-center font-lato`}
+        className={`${lato.variable} ${merriweather.variable} flex min-h-screen w-full flex-col items-center justify-center font-lato`}
       >
         <Component {...pageProps} />
       </div>
@@ -34,4 +32,4 @@ const MyApp: AppType<{ session: Session | null }> = ({
   );
 };
 
-export default api.withTRPC(MyApp);
+export default MyApp;

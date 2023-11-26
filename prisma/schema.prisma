@@ -7,10 +7,6 @@ generator client {
 
 datasource db {
     provider = "mongodb"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
 
@@ -45,11 +41,67 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid()) @map("_id")
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    Account       Account[]
-    Session       Session[]
+    id             String      @id @default(cuid()) @map("_id")
+    name           String?
+    email          String?     @unique
+    emailVerified  DateTime?
+    image          String?
+    Account        Account[]
+    Session        Session[]
+    groups         Group[]     @relation(fields: [groupsIDs], references: [id])
+    groupsIDs      String[]    @db.ObjectId
+    communities    Community[] @relation(fields: [communitiesIDs], references: [id])
+    communitiesIDs String[]    @db.ObjectId
+}
+
+model TransactionNotification {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    groupId   String   @db.ObjectId
+    userId    String
+    amount    Int
+    type      String
+    createdAt DateTime @default(now())
+    read      Boolean  @default(false)
+}
+
+model InviteNotification {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId    String
+    groupId   String   @db.ObjectId
+    invitedBy String
+    groupName String
+    createdAt DateTime @default(now())
+    accepted  Boolean  @default(false)
+    read      Boolean  @default(false)
+}
+
+model Transaction {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    type        String
+    amount      Int
+    time        DateTime
+    place       String?
+    title       String?
+    description String?
+    Group       Group    @relation(fields: [groupId], references: [id])
+    groupId     String   @db.ObjectId
+}
+
+model Group {
+    id           String        @id @default(auto()) @map("_id") @db.ObjectId
+    name         String
+    icon         String
+    description  String?
+    users        User[]        @relation(fields: [usersIDs], references: [id])
+    usersIDs     String[]
+    transactions Transaction[]
+}
+
+model Community {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    name        String
+    description String?
+    icon        String
+    users       User[]   @relation(fields: [usersIDs], references: [id])
+    usersIDs    String[]
 }

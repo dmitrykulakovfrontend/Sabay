@@ -29,7 +29,7 @@ const Spend = () => {
         </button>
         <h2 className="font-lato text-base font-bold uppercase">Favorites</h2>
         <div className="flex flex-wrap gap-2">
-          <Link href={"/spend/new"}>
+          <Link href={"/spending/new"}>
             <Image
               className="rounded-3xl bg-zinc-300 shadow-md drop-shadow-md"
               width={80}
@@ -38,7 +38,7 @@ const Spend = () => {
               src={favorite}
             />
           </Link>
-          <Link href={"/spend/new"}>
+          <Link href={"/spending/new"}>
             <Image
               className="rounded-3xl bg-zinc-300 shadow-md drop-shadow-md"
               width={80}
@@ -47,7 +47,7 @@ const Spend = () => {
               src={favorite}
             />
           </Link>
-          <Link href={"/spend/new"}>
+          <Link href={"/spending/new"}>
             <Image
               className="rounded-3xl bg-zinc-300 shadow-md drop-shadow-md"
               width={80}
@@ -59,7 +59,7 @@ const Spend = () => {
         </div>
         <h2 className="font-lato text-base font-bold uppercase">Recents</h2>
         <div className="flex flex-col gap-4">
-          <Link href={"/spend/new"} className="flex justify-start gap-2">
+          <Link href={"/spending/new"} className="flex justify-start gap-2">
             <Image
               className="h-16 w-16"
               width={60}
@@ -86,7 +86,7 @@ const Spend = () => {
               <p className=" font-lato text-sm font-bold">Р555.00</p>
             </div>
           </Link>
-          <Link href={"/spend/new"} className="flex justify-start gap-2">
+          <Link href={"/spending/new"} className="flex justify-start gap-2">
             <Image
               className="h-16 w-16"
               width={60}
@@ -131,7 +131,7 @@ const Spend = () => {
               </p>
             </div>
           </div>
-          <Link href={"/spend/new"} className="flex justify-start gap-2">
+          <Link href={"/spending/new"} className="flex justify-start gap-2">
             <Image
               width={40}
               height={40}
@@ -146,7 +146,7 @@ const Spend = () => {
               </p>
             </div>
           </Link>
-          <Link href={"/spend/new"} className="flex justify-start gap-2">
+          <Link href={"/spending/new"} className="flex justify-start gap-2">
             <Image
               width={40}
               height={40}

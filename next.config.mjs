@@ -14,8 +14,20 @@ const config = {
    * @see https://github.com/vercel/next.js/issues/41980
    */
   i18n: {
-    locales: ["en"],
+    locales: [ "en" ],
     defaultLocale: "en",
+  },
+  images: {
+    domains: [ 'res.cloudinary.com', 'lh3.googleusercontent.com' ]
+  }, experimental: {
+    swcPlugins: [
+      [
+        'next-superjson-plugin',
+        {
+          excluded: [],
+        },
+      ],
+    ],
   },
 };
 

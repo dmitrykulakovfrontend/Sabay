@@ -18,7 +18,7 @@ const Footer = () => {
       <Link href={"/communities"}>
         <Image width={35} height={35} src={user as string} alt="" />
       </Link>
-      <Link href={"/spend"}>
+      <Link href={"/spending/new"}>
         <Image width={65} height={65} src={mainMenu as string} alt="" />
       </Link>
       <Link href={"/chat"}>

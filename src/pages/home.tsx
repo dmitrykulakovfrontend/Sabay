@@ -2,10 +2,31 @@ import React, { useState } from "react";
 import Image from "next/image";
 import menu from "@/assets/mingcute-menu-fill.svg";
 import search from "@/assets/mdi-magnify.svg";
-import add from "@/assets/add.svg";
+import add from "@/assets/add.png";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-const Home = () => {
+import {
+  type InferGetServerSidePropsType,
+  type GetServerSideProps,
+} from "next";
+import { db } from "@/utils/db";
+import { CldImage } from "next-cloudinary";
+
+export const getServerSideProps = async () => {
+  const groups = await db.group.findMany();
+  const communities = await db.community.findMany();
+  return {
+    props: {
+      groups,
+      communities,
+    },
+  };
+};
+
+const Home = ({
+  groups,
+  communities,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [isCommunities, setCommunities] = useState(false);
   return (
     <div className="mb-[80px] flex min-h-[calc(100vh_-_80px)] w-full flex-col gap-8 px-4">
@@ -60,45 +81,59 @@ const Home = () => {
       <div>
         {isCommunities ? (
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <div className="flex h-32 w-80 items-end justify-center rounded-xl bg-zinc-300 pb-8 font-lato font-bold text-white">
-              Community Name
-            </div>
-            <div className="flex h-32 w-80 items-end justify-center rounded-xl bg-zinc-300 pb-8 font-lato font-bold text-white">
-              Community Name
-            </div>
-            <div className="flex h-32 w-80 items-end justify-center rounded-xl bg-zinc-300 pb-8 font-lato font-bold text-white">
-              Community Name
-            </div>
+            <Link
+              href={"/communities/new"}
+              className="flex h-32 w-80 flex-col items-center  justify-evenly rounded-xl font-merriweather"
+            >
+              <Image width={70} height={70} src={add} alt="Add" />
+              <p>Create Community</p>
+            </Link>
+            {communities.map((community) => (
+              <Link
+                key={community.id}
+                className="relative bottom-0 flex h-32 w-80 flex-col items-center  justify-evenly rounded-xl border bg-primary transition-all hover:bottom-2 hover:rotate-2 hover:scale-105"
+                href={`/communities/${community.id}`}
+              >
+                <CldImage
+                  width={320}
+                  className="h-32 w-80 object-contain"
+                  height={128}
+                  alt=""
+                  src={community.icon}
+                />
+                <p className="absolute bottom-2 font-lato font-bold text-white shadow-md drop-shadow-md">
+                  {community.name}
+                </p>
+              </Link>
+            ))}
           </div>
         ) : (
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href={"/group"}
-              className="flex h-32 w-32 flex-col items-center justify-evenly rounded-xl bg-zinc-300"
+              href={"/groups/new"}
+              className="flex h-32 w-32 flex-col items-center justify-evenly rounded-xl  font-merriweather "
             >
-              <Image width={70} height={70} src={add as string} alt="Add" />
+              <Image width={70} height={70} src={add} alt="Add" />
               <p>Create Group</p>
             </Link>
-            <Link
-              className="h-32 w-32 rounded-xl bg-zinc-300"
-              href={"/group"}
-            ></Link>
-            <Link
-              className="h-32 w-32 rounded-xl bg-zinc-300"
-              href={"/group"}
-            ></Link>
-            <Link
-              className="h-32 w-32 rounded-xl bg-zinc-300"
-              href={"/group"}
-            ></Link>
-            <Link
-              className="h-32 w-32 rounded-xl bg-zinc-300"
-              href={"/group"}
-            ></Link>
-            <Link
-              className="h-32 w-32 rounded-xl bg-zinc-300"
-              href={"/group"}
-            ></Link>
+            {groups.map((group) => (
+              <Link
+                key={group.id}
+                className="relative bottom-0 flex h-32 w-32 flex-col items-center justify-center rounded-xl border bg-primary transition-all hover:bottom-2 hover:rotate-2 hover:scale-105"
+                href={`/groups/${group.id}`}
+              >
+                <CldImage
+                  className=" h-32 w-32 rounded-xl"
+                  width={128}
+                  height={128}
+                  alt=""
+                  src={group.icon}
+                />
+                <p className="absolute bottom-2 font-lato font-bold text-white drop-shadow-md">
+                  {group.name}
+                </p>
+              </Link>
+            ))}
           </div>
         )}
       </div>

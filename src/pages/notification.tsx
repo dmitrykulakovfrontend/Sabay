@@ -4,8 +4,34 @@ import arrow from "@/assets/clarity-arrow-line.svg";
 import Image from "next/image";
 import notificationSrc from "@/assets/notification.png";
 import { useRouter } from "next/router";
+import notification from "@/assets/carbon-notification.svg";
+import { db } from "@/utils/db";
+import {
+  type GetServerSidePropsContext,
+  type InferGetServerSidePropsType,
+} from "next";
+import { getServerAuthSession } from "./api/auth/[...nextauth]";
 
-const Notification = () => {
+export const getServerSideProps = async ({
+  req,
+  res,
+}: GetServerSidePropsContext) => {
+  const session = await getServerAuthSession({ req, res });
+  const invites = await db.inviteNotification.findMany({
+    where: {
+      userId: session?.user.id,
+    },
+  });
+  return {
+    props: {
+      invites,
+    },
+  };
+};
+
+const Notification = ({
+  invites,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const notifications = [
     {
@@ -59,7 +85,24 @@ const Notification = () => {
       </header>
       <main className="my-4 flex flex-col gap-4">
         <div className="flex flex-col gap-0">
-          {notifications.map((notification, i) => (
+          {invites.map((invite, i) => (
+            <div
+              key={i}
+              className="relative flex items-center justify-start gap-2 px-4 py-2"
+            >
+              <Image width={40} height={40} alt="" src={notificationSrc} />
+              <div className="flex flex-col gap-0">
+                <p className="font-lato text-xs font-bold">Group Invitation</p>
+                <p className="font-lato text-sm">
+                  {invite.invitedBy} has invited you to join {invite.groupName}
+                </p>
+              </div>
+              <div className="absolute right-2 top-1 -translate-x-2 font-lato text-xs font-bold">
+                {invite.createdAt.toLocaleString()}
+              </div>
+            </div>
+          ))}
+          {/* {notifications.map((notification, i) => (
             <div
               key={i}
               className="relative flex items-center justify-start gap-2 px-4 py-2"
@@ -75,7 +118,7 @@ const Notification = () => {
                 {notification.time}
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </main>
       <Footer />

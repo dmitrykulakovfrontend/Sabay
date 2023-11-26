@@ -1,4 +1,3 @@
-import { authOptions } from "@/server/auth";
 import {
   type InferGetServerSidePropsType,
   type GetServerSidePropsContext,
@@ -11,6 +10,7 @@ import googleSrc from "@/assets/login-ph-google-logo-fill.svg";
 import facebookSrc from "@/assets/login-akar-icons-facebook-fill.svg";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { getServerAuthSession } from "../api/auth/[...nextauth]";
 
 export default function SignIn({
   providers,
@@ -19,7 +19,7 @@ export default function SignIn({
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <div className="flex w-full max-w-sm flex-col items-center justify-center gap-12 p-8">
+    <div className="flex min-h-screen  w-full flex-col items-center justify-center gap-12 bg-primary p-8">
       <div className="flex flex-col items-center justify-center gap-4 font-merriweather">
         <Image src={logoSrc} width={100} height={200} alt="" />
       </div>
@@ -28,7 +28,7 @@ export default function SignIn({
           e.preventDefault();
           void router.push("/features");
         }}
-        className="flex w-full flex-col gap-2"
+        className="flex w-full flex-col items-center justify-center gap-2"
       >
         <label
           htmlFor="username"
@@ -38,7 +38,7 @@ export default function SignIn({
         </label>
         <input
           type="text"
-          className="bg-gradient-to-t from-zinc-200 to-white p-2"
+          className="w-full max-w-xs border-b-2 border-black bg-primary  p-2 opacity-100"
           name="username"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
@@ -46,7 +46,7 @@ export default function SignIn({
         />
         <label
           htmlFor="password"
-          className="font-merriweather text-lg uppercase"
+          className=" font-merriweather text-lg uppercase"
         >
           Password
         </label>
@@ -56,30 +56,30 @@ export default function SignIn({
           id="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
-          className="bg-gradient-to-t from-zinc-200 to-white p-2"
+          className="w-full max-w-xs border-b-2 border-black bg-primary p-2"
         />
         <button
           type="submit"
-          className="mt-8 w-full rounded-3xl bg-zinc-300 py-2  font-merriweather text-xl uppercase"
+          className="mx-auto mt-8 w-full max-w-xs rounded-3xl bg-secondary py-2 font-merriweather text-xl  uppercase text-white"
         >
           Login
         </button>
       </form>
       <div className="relative">
         <div className="absolute -left-8 top-1/2 h-[2px] w-1/3 -translate-x-1/2 -translate-y-1/2 bg-black"></div>
-        <span className=" bg-white px-2 font-merriweather uppercase">
+        <span className=" bg-transparent px-2 font-merriweather uppercase">
           Or connect with
         </span>
         <div className="absolute -right-8 top-1/2 h-[2px] w-1/3 -translate-y-1/2 translate-x-1/2 bg-black"></div>
       </div>
-      <div className="flex w-full gap-4">
+      <div className="flex w-full items-center justify-center gap-4">
         <button
           onClick={() =>
             signIn("google", {
               callbackUrl: "/features",
             })
           }
-          className="flex w-full gap-2 rounded-3xl border  border-slate-200 bg-zinc-300 px-4  py-2 font-merriweather  text-xl uppercase text-black transition duration-150  hover:border-slate-400 hover:text-slate-900 hover:shadow"
+          className="flex w-full max-w-xs gap-2 rounded-3xl bg-secondary  px-4 py-2  font-merriweather text-xl  uppercase  text-white transition duration-150   hover:shadow"
         >
           <Image src={facebookSrc as string} width={24} height={24} alt="" />
           <span className="text-base uppercase">Facebook</span>
@@ -90,7 +90,7 @@ export default function SignIn({
               callbackUrl: "/features",
             })
           }
-          className="flex w-full gap-2 rounded-3xl border  border-slate-200 bg-zinc-300 px-4  py-2 font-merriweather  text-xl uppercase text-black transition duration-150  hover:border-slate-400 hover:text-slate-900 hover:shadow"
+          className="flex w-full max-w-xs gap-2 rounded-3xl bg-secondary px-4 py-2  font-merriweather text-xl  uppercase  text-white transition duration-150  hover:shadow"
         >
           <Image src={googleSrc as string} width={24} height={24} alt="" />
           <span className="text-base uppercase">google</span>
@@ -100,8 +100,11 @@ export default function SignIn({
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
+export async function getServerSideProps({
+  req,
+  res,
+}: GetServerSidePropsContext) {
+  const session = await getServerAuthSession({ req, res });
 
   // If the user is already logged in, redirect.
   // Note: Make sure not to redirect to the same page
