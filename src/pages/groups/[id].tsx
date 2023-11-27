@@ -1,29 +1,27 @@
 import React, { useState } from "react";
 import Footer from "@/components/Footer";
-import arrow from "@/assets/clarity-arrow-line.svg";
-import userIcon from "@/assets/friendly-ones-avatar.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import {
+  type GetServerSidePropsContext,
+  type InferGetServerSidePropsType,
+} from "next";
+import { db } from "@/utils/db";
+import { type ParsedUrlQuery } from "querystring";
+import { CldImage } from "next-cloudinary";
+
+import userIcon from "@/assets/friendly-ones-avatar.png";
+import arrow from "@/assets/clarity-arrow-line.svg";
 import electricity from "@/assets/akar-icons-thunder.svg";
 import water from "@/assets/ic-outline-water-drop.svg";
 import house from "@/assets/ph-house-bold.svg";
 import food from "@/assets/fluent-food-24-regular.svg";
 import travel from "@/assets/material-symbols-travel.svg";
+import Modal from "react-modal";
 import dots from "@/assets/tabler-dots.svg";
-import {
-  type GetServerSidePropsContext,
-  type GetServerSideProps,
-  type InferGetServerSidePropsType,
-} from "next";
-import group from "@/assets/family-values-friends.png";
-import { db } from "@/utils/db";
-import { type ParsedUrlQuery } from "querystring";
-import { CldImage } from "next-cloudinary";
-
-// type idUrl = ParsedUrlQuery & {
-//   id: string;
-// };
+import edit from "@/assets/pepicons-pop-pen.svg";
+import invite from "@/assets/mingcute-invite-fill.svg";
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -63,6 +61,7 @@ const Group = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
   const transactions = [
     {
       name: "Electric Bills",
@@ -139,7 +138,9 @@ const Group = ({
       }),
     });
     setEmail("");
+    setIsOpen(false);
   }
+  console.log(modalIsOpen);
   return (
     <div className="min-h-screen  w-full p-4">
       <header className="relative flex w-full justify-center">
@@ -152,31 +153,6 @@ const Group = ({
         <h1 className="font-lato text-3xl font-bold uppercase">Groups</h1>
       </header>
       <main className="my-4 flex flex-col gap-4">
-        <div>
-          <form
-            onSubmit={handleInvite}
-            className="flex flex-col items-center justify-between gap-4"
-          >
-            <label htmlFor="email">Add members: </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              className=" w-full rounded-lg bg-other p-2 font-bold shadow-md"
-              name="email"
-              placeholder="@gmail.com"
-              id="email"
-            />
-            <button
-              type="submit"
-              className="mt-4 flex w-full items-center justify-center rounded-md bg-secondary py-2 text-white"
-            >
-              Invite
-            </button>
-          </form>
-        </div>
         <Link href={"/transactions"}>
           <p className="my-4 font-merriweather text-2xl uppercase">
             {group.name}
@@ -190,7 +166,68 @@ const Group = ({
           />
         </Link>
         <div>
-          <p className="mb-4 font-merriweather text-2xl">Members:</p>
+          <div className="mb-4 flex  justify-between pr-4">
+            <p className="font-merriweather text-2xl">Members:</p>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="flex items-center justify-center gap-4 font-merriweather text-xs font-bold italic underline underline-offset-1"
+            >
+              add members{" "}
+              <Image
+                src={edit as string}
+                alt=""
+                width={17}
+                height={17}
+                className="h-fit"
+              />
+            </button>
+            <Modal
+              overlayClassName="fixed inset-0 bg-transparent"
+              isOpen={modalIsOpen}
+              shouldCloseOnOverlayClick={true}
+              onRequestClose={() => setIsOpen(false)}
+              contentLabel="Add members"
+              className="absolute left-1/2 top-1/2 h-fit w-full max-w-xs -translate-x-1/2 -translate-y-1/2"
+            >
+              <form
+                className="flex flex-col gap-2 rounded-lg bg-gradient-to-b from-secondary to-other p-5 font-lato text-white"
+                onSubmit={handleInvite}
+              >
+                <h2 className="text-center text-2xl font-bold uppercase">
+                  Add members
+                </h2>
+                <div className="flex items-end justify-between">
+                  <p className="text-xl font-bold uppercase">Add members:</p>
+                  <button className="font-bold underline underline-offset-1 ">
+                    by email
+                  </button>
+                </div>
+                <div className="relative w-full">
+                  <input
+                    className="w-full rounded-md px-4 py-2 text-black underline underline-offset-2"
+                    type="email"
+                    name="email"
+                    placeholder="@gmail.com"
+                    id="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
+                  <Image
+                    className="absolute right-2 top-1/2 -translate-y-1/2"
+                    alt=""
+                    width={20}
+                    height={20}
+                    src={invite as string}
+                  />
+                </div>
+                <button className="mx-auto w-fit rounded-md bg-primary  px-16 py-2 font-bold uppercase text-secondary">
+                  Add
+                </button>
+              </form>
+            </Modal>
+          </div>
           <ul className="mb-4 flex flex-col gap-2">
             {group.users.map((user) => (
               <li key={user.id} className="flex items-center gap-2">

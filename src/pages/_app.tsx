@@ -1,6 +1,7 @@
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
+import Modal from "react-modal";
 
 import "@/styles/globals.css";
 import { Merriweather, Lato } from "next/font/google";
@@ -17,6 +18,7 @@ const lato = Lato({
   variable: "--font-lato",
   weight: ["300", "100", "400", "700", "900"],
 });
+Modal.setAppElement("#__next");
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },

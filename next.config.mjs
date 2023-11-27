@@ -19,16 +19,7 @@ const config = {
   },
   images: {
     domains: [ 'res.cloudinary.com', 'lh3.googleusercontent.com' ]
-  }, experimental: {
-    swcPlugins: [
-      [
-        'next-superjson-plugin',
-        {
-          excluded: [],
-        },
-      ],
-    ],
-  },
+  }
 };
 
 export default config;
