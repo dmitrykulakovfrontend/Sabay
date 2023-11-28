@@ -130,7 +130,7 @@ const Home = ({
             {communities.map((community) => (
               <Link
                 key={community.id}
-                className="relative bottom-0 flex h-32 w-80 flex-col items-center  justify-evenly rounded-xl border bg-primary transition-all hover:bottom-2 hover:rotate-2 hover:scale-105"
+                className="relative bottom-0 flex h-32 w-80 flex-col items-center  justify-evenly rounded-xl border  transition-all hover:bottom-2 hover:rotate-2 hover:scale-105"
                 href={`/communities/${community.id}`}
               >
                 <CldImage
@@ -253,7 +253,7 @@ const Home = ({
             {groups.map((group) => (
               <Link
                 key={group.id}
-                className="relative bottom-0 flex h-32 w-32 flex-col items-center justify-center rounded-xl border bg-primary transition-all hover:bottom-2 hover:rotate-2 hover:scale-105"
+                className="relative bottom-0 flex h-32 w-32 flex-col items-center justify-center rounded-xl border transition-all hover:bottom-2 hover:rotate-2 hover:scale-105"
                 href={`/groups/${group.id}`}
               >
                 <CldImage
