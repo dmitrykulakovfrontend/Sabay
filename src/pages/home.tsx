@@ -99,9 +99,9 @@ const Home = ({
               isCommunities ? "" : "font-bold"
             }`}
           >
-            Your groups
+            Public Groups
             {!isCommunities && (
-              <div className="absolute bottom-0 left-1/2 h-1 w-1/2 -translate-x-1/2 bg-black"></div>
+              <div className="absolute bottom-0 left-1/2 h-1 w-2/3 -translate-x-1/2 bg-black"></div>
             )}
           </button>
           <button
@@ -112,7 +112,7 @@ const Home = ({
           >
             Communities
             {isCommunities && (
-              <div className="absolute bottom-0 left-1/2 h-1 w-1/2 -translate-x-1/2 bg-black"></div>
+              <div className="absolute bottom-0 left-1/2 h-1 w-2/3 -translate-x-1/2 bg-black"></div>
             )}
           </button>
         </div>
@@ -215,13 +215,14 @@ const Home = ({
                 </div>
                 <input
                   type="text"
-                  className="mx-auto max-w-[100px] bg-transparent text-center font-lato font-bold placeholder:text-white placeholder:underline placeholder:underline-offset-2"
+                  className="mx-auto max-w-[150px] bg-transparent text-center font-lato font-bold placeholder:text-white placeholder:underline placeholder:underline-offset-2"
                   placeholder="Group Name"
                   name="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   id="name"
                 />
+
                 {/* <div className="flex items-end justify-between">
                   <p className="text-xl font-bold uppercase">Add members:</p>
                   <button className="font-bold underline underline-offset-1 ">
@@ -244,7 +245,7 @@ const Home = ({
                     src={invite as string}
                   />
                 </div> */}
-                <button className="mx-auto w-fit rounded-md bg-primary px-16 py-2 font-bold uppercase text-secondary">
+                <button className="home-add-button-shadow mx-auto w-fit rounded-md bg-primary px-16 py-2 font-bold uppercase text-secondary">
                   Add
                 </button>
               </form>
