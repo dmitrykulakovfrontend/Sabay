@@ -19,28 +19,28 @@ const Chat = () => {
   const [tab, setTab] = useState<MessageType>("Inbox");
   const messages = [
     {
-      username: "[User Name]",
-      message: "Sample message - lorem ipsum stuff",
-      amount: 31,
-      time: "10:30 AM",
-    },
-    {
-      username: "[User Name]",
-      message: "Sample message - lorem ipsum stuff",
-      amount: 71,
-      time: "10:30 AM",
-    },
-    {
-      username: "[User Name]",
-      message: "Sample message - lorem ipsum stuff",
+      username: "Tanya Grifud Ahmed",
+      message: "Payment sent. Confirm details. Thanks!",
       amount: 1,
-      time: "10:30 AM",
+      time: "7:46 AM",
     },
     {
-      username: "[User Name]",
-      message: "Sample message - lorem ipsum stuff",
-      amount: 99,
-      time: "10:30 AM",
+      username: "Ellen Horst Mercer",
+      message: "Expense shared. Review and confirm, please.",
+      amount: 3,
+      time: "11:30 AM",
+    },
+    {
+      username: "Iris Hel Martínek",
+      message: "Check your inbox. Shared expenses details.",
+      amount: 1,
+      time: "12:20 PM",
+    },
+    {
+      username: "Fitzwilliam Ravza Vicario",
+      message: "Confirmed payment. Verify shared expenses.",
+      amount: 4,
+      time: "5:30 PM",
     },
   ];
   return (
@@ -54,7 +54,7 @@ const Chat = () => {
         </button>
         <h1 className="font-lato text-3xl font-bold uppercase">Inbox</h1>
       </header>
-      <main className="my-4 flex flex-col gap-4">
+      <main className="my-4 flex flex-col">
         <nav className="flex pl-1">
           {Object.values(MessageType).map((type) => (
             <button
