@@ -144,20 +144,20 @@ const New = ({
                 {form.group.name} members will pay equally.
               </option>
               <option value="payForEveryone">A member will pay in full</option>
-              <option value="payFor" disabled>
+              <option value="payFor">
                 A member will pay for another member
               </option>
-              <option value="payByYourself" disabled>
+              <option value="payByYourself">
                 {form.group.name} members will pay for their own items.
               </option>
-              <option value="payPercentage" disabled>
+              <option value="payPercentage">
                 {form.group.name} members will pay in percentage.
               </option>
             </select>
           </div>
           <div>
             <label className="font-lato font-bold" htmlFor="title">
-              Spenditure Title:
+              Expenditure Title:
             </label>
             <input
               className="mt-2 w-full rounded-md bg-other px-2 py-1"
@@ -171,7 +171,7 @@ const New = ({
           </div>
           <div>
             <label className="font-lato font-bold" htmlFor="description">
-              Spenditure Description:
+              Expenditure Description:
             </label>
             <textarea
               name="description"
