@@ -79,7 +79,7 @@ const Home = ({
               Search
             </label>
             <input
-              className="w-full rounded-md bg-zinc-300 py-2"
+              className="home-search-input w-full rounded-md bg-zinc-300 py-2"
               type="text"
               id="search"
             />
