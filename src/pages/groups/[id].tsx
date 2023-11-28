@@ -159,7 +159,7 @@ const Group = ({
           </p>
           <CldImage
             width={320}
-            className="h-36 w-80 rounded-xl bg-primary object-contain"
+            className="h-36 w-80 rounded-xl object-contain"
             height={144}
             alt=""
             src={group.icon}
