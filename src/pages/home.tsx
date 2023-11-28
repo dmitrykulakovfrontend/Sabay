@@ -175,7 +175,7 @@ const Home = ({
                 <div className="flex w-full items-center justify-center">
                   <label
                     htmlFor="dropzone-file"
-                    className="dark:hover:bg-bray-800 relative flex h-32 w-32 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-zinc-200 hover:bg-gray-100"
+                    className="dark:hover:bg-bray-800 relative flex h-32 w-32 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-primary hover:bg-gray-100"
                   >
                     <div className="flex flex-col items-center justify-center rounded-full border-2 border-dashed border-black p-2">
                       <Image
