@@ -60,7 +60,7 @@ const Chat = () => {
             <button
               key={type}
               className={`${
-                type === tab ? "bg-zinc-300 font-bold" : "bg-white"
+                type === tab ? "bg-primary font-bold" : "bg-white"
               } rounded-t-md px-4 py-1 font-lato text-sm `}
               onClick={() => setTab(type)}
             >
