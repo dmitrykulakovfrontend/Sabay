@@ -149,7 +149,7 @@ const Communities = ({
         >
           <Image src={arrow as string} width={35} height={35} alt="" />
         </button>
-        <h1 className="font-lato text-3xl font-bold uppercase">Communitiess</h1>
+        <h1 className="font-lato text-3xl font-bold uppercase">Communities</h1>
       </header>
       <main className="my-4 flex flex-col gap-4">
         <div>
@@ -179,11 +179,11 @@ const Communities = ({
         </div>
         <Link href={"/transactions"}>
           <p className="my-4 font-merriweather text-2xl uppercase">
-            {communities.name}
+            {communities.name} Community
           </p>
           <CldImage
             width={320}
-            className="h-36 w-80 rounded-xl bg-primary object-contain"
+            className="h-36 w-80 rounded-xl object-contain"
             height={144}
             alt=""
             src={communities.icon}
@@ -206,69 +206,6 @@ const Communities = ({
             ))}
           </ul>
         </div>
-
-        <h2 className="font-merriweather text-2xl">Transaction History</h2>
-        <ul className="flex flex-col">
-          {transactions.map(({ amount, icon, name }, i) => (
-            <li
-              key={i}
-              className="flex items-center justify-between gap-2 border-2 border-black p-2 odd:bg-[#EBEBEB] even:bg-[#BEBEBE]"
-            >
-              <div className="flex items-center gap-2">
-                <Image
-                  className="h-8 w-8 rounded-full bg-[#D9D9D9] p-1"
-                  alt=""
-                  width={32}
-                  height={32}
-                  src={icon}
-                />
-                <div className="flex flex-col gap-0">
-                  <p className="font-merriweather text-base font-bold leading-none">
-                    {name}
-                  </p>
-                  <time className="font-merriweather text-xs leading-none">
-                    Date and time
-                  </time>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <p>P{amount}</p>
-                <button>
-                  <Image width={23} height={23} alt="" src={dots as string} />
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <h2 className="font-merriweather text-2xl">Summary</h2>
-        <table>
-          <thead className="bg-[#BEBEBE] text-center font-merriweather uppercase">
-            <tr>
-              <th>Category</th>
-              <th>Expense</th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-            {summary.map(({ amount, icon, name }, i) => (
-              <tr
-                key={i}
-                className=" font-merriweather text-xs odd:bg-white even:bg-[#BEBEBE]"
-              >
-                <td className="flex items-center  gap-2 py-2">
-                  <Image
-                    className=""
-                    alt=""
-                    width={25}
-                    height={25}
-                    src={icon}
-                  />
-                  <p>{name}</p>
-                </td>
-                <td>P{amount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </main>
       <Footer />
     </div>

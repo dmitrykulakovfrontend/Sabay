@@ -37,7 +37,7 @@ const Communities = ({
           {communities.map((community) => (
             <Link
               key={community.id}
-              className="relative bottom-0 flex h-32 w-80 flex-col items-center  justify-evenly rounded-xl border bg-primary transition-all hover:bottom-2 hover:rotate-2 hover:scale-105"
+              className="relative bottom-0 flex h-32 w-80 flex-col items-center  justify-evenly rounded-xl border  transition-all hover:bottom-2 hover:rotate-2 hover:scale-105"
               href={`/communities/${community.id}`}
             >
               <CldImage
