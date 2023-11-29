@@ -97,7 +97,7 @@ const New = ({
           <div className="flex items-center justify-between">
             <CldImage
               width={144}
-              className="h-36 w-36 rounded-xl bg-primary object-contain"
+              className="h-36 w-36 rounded-xl object-contain"
               height={144}
               alt=""
               src={form.group?.icon ?? ""}
