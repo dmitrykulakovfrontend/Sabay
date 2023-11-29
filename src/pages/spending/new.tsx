@@ -1,5 +1,5 @@
 import Footer from "@/components/Footer";
-import React, { useState } from "react";
+import React, { type FormEvent, useState } from "react";
 import arrow from "@/assets/clarity-arrow-line.svg";
 import search from "@/assets/mdi-magnify.svg";
 import spend from "@/assets/family-values-friends-big.png";
@@ -12,6 +12,7 @@ import Link from "next/link";
 import { type InferGetServerSidePropsType } from "next";
 import { db } from "@/utils/db";
 import { CldImage } from "next-cloudinary";
+import { useSession } from "next-auth/react";
 
 export const getServerSideProps = async () => {
   const groups = await db.group.findMany();
@@ -26,6 +27,7 @@ const New = ({
   groups,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
+  const session = useSession();
   const [form, setForm] = useState({
     type: "food",
     date: new Date().toDateString(),
@@ -35,7 +37,46 @@ const New = ({
     title: "",
     description: "",
   });
-  console.log(form);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    // const form = req.body as {
+    //   type: string;
+    //   date: string;
+    //   amount: number;
+    //   group: {
+    //     id: string;
+    //     name: string;
+    //     icon: string;
+    //     description: string | null;
+    //     usersIDs: string[];
+    //   };
+    //   split: string;
+    //   title: string;
+    //   description: string;
+    // };
+    const data = {
+      type: form.type,
+      date: form.date,
+      amount: form.amount,
+      groupId: form.group.id,
+      splitType: form.split,
+      title: form.title,
+      description: form.description,
+      groupName: form.group.name,
+    };
+    await fetch("/api/spend/new", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(form);
+  }
+
   return (
     <div className="mb-[80px] flex min-h-[calc(100vh_-_80px)] w-full flex-col bg-other">
       <header className="relative flex w-full justify-center p-4">
@@ -52,7 +93,7 @@ const New = ({
           <span className="font-bold">Spending with: </span>
           <span>{form.group?.name}</span>
         </h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex items-center justify-between">
             <CldImage
               width={144}
@@ -96,6 +137,7 @@ const New = ({
                 <input
                   type="number"
                   name="amount"
+                  min={0}
                   value={form.amount}
                   onChange={(e) => {
                     setForm({ ...form, amount: Number(e.target.value) });
@@ -143,8 +185,10 @@ const New = ({
               <option value="payEqually">
                 {form.group.name} members will pay equally.
               </option>
-              <option value="payForEveryone">A member will pay in full</option>
-              <option value="payFor">
+              <option value="payForEveryone" disabled>
+                A member will pay in full
+              </option>
+              <option value="payFor" disabled>
                 A member will pay for another member
               </option>
               <option value="payByYourself">

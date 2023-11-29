@@ -5,6 +5,7 @@ import Modal from "react-modal";
 
 import "@/styles/globals.css";
 import { Merriweather, Lato } from "next/font/google";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 const merriweather = Merriweather({
   subsets: ["latin-ext"],
   display: "swap",
@@ -24,13 +25,15 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <div
-        className={`${lato.variable} ${merriweather.variable} flex min-h-screen w-full flex-col items-center justify-center font-lato`}
-      >
-        <Component {...pageProps} />
-      </div>
-    </SessionProvider>
+    <PayPalScriptProvider options={{ clientId: "test", currency: "PHP" }}>
+      <SessionProvider session={session}>
+        <div
+          className={`${lato.variable} ${merriweather.variable} flex min-h-screen w-full flex-col items-center justify-center font-lato`}
+        >
+          <Component {...pageProps} />
+        </div>
+      </SessionProvider>
+    </PayPalScriptProvider>
   );
 };
 

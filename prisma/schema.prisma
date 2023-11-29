@@ -55,13 +55,16 @@ model User {
 }
 
 model TransactionNotification {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    groupId   String   @db.ObjectId
-    userId    String
-    amount    Int
-    type      String
-    createdAt DateTime @default(now())
-    read      Boolean  @default(false)
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    groupId     String   @db.ObjectId
+    groupName   String
+    userId      String
+    requestedBy String
+    title       String
+    amount      Int
+    type        String
+    createdAt   DateTime @default(now())
+    read        Boolean  @default(false)
 }
 
 model InviteNotification {
@@ -76,15 +79,16 @@ model InviteNotification {
 }
 
 model Transaction {
-    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
     type        String
     amount      Int
-    time        DateTime
+    date        String
     place       String?
-    title       String?
+    title       String
     description String?
-    Group       Group    @relation(fields: [groupId], references: [id])
-    groupId     String   @db.ObjectId
+    splitType   String
+    Group       Group   @relation(fields: [groupId], references: [id])
+    groupId     String  @db.ObjectId
 }
 
 model Group {

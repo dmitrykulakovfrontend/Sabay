@@ -153,7 +153,7 @@ const Group = ({
         <h1 className="font-lato text-3xl font-bold uppercase">Groups</h1>
       </header>
       <main className="my-4 flex flex-col gap-4">
-        <Link href={"/transactions"}>
+        <div>
           <p className="my-4 font-merriweather text-2xl uppercase">
             {group.name}
           </p>
@@ -164,7 +164,7 @@ const Group = ({
             alt=""
             src={group.icon}
           />
-        </Link>
+        </div>
         <div>
           <div className="mb-4 flex  justify-between pr-4">
             <p className="font-merriweather text-2xl">Members:</p>
