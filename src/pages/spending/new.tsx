@@ -185,10 +185,8 @@ const New = ({
               <option value="payEqually">
                 {form.group.name} members will pay equally.
               </option>
-              <option value="payForEveryone" disabled>
-                A member will pay in full
-              </option>
-              <option value="payFor" disabled>
+              <option value="payForEveryone">A member will pay in full</option>
+              <option value="payFor">
                 A member will pay for another member
               </option>
               <option value="payByYourself">
