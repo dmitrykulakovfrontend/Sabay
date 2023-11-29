@@ -230,9 +230,12 @@ const New = ({
               rows={5}
             ></textarea>
           </div>
-          <button className="mt-4 flex w-full items-center justify-center rounded-md bg-secondary py-2 text-white">
+          <Link
+            href="/spending/request"
+            className="mt-4 flex w-full items-center justify-center rounded-md bg-secondary py-2 text-white"
+          >
             <span className="font-lato text-sm font-bold">Next</span>
-          </button>
+          </Link>
         </form>
       </main>
       <Footer />
