@@ -24,7 +24,7 @@ const Calculate = () => {
         <h1 className="font-lato text-3xl font-bold uppercase">Spend</h1>
       </header>
       <main className=" flex flex-1 flex-col gap-4 bg-white p-4">
-        <h1>[Group Name's] expense on [Expenditure Title]</h1>
+        <h1>[Group Name&apos;s] expense on [Expenditure Title]</h1>
         <Link
           href="../home"
           className="mt-4 flex w-full items-center justify-center rounded-md bg-secondary py-2 text-white"
