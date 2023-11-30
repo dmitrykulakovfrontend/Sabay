@@ -229,7 +229,7 @@ const New = ({
             ></textarea>
           </div>
           <Link
-            href="/spending/request"
+            href="/spending/calculate"
             className="mt-4 flex w-full items-center justify-center rounded-md bg-secondary py-2 text-white"
           >
             <span className="font-lato text-sm font-bold">Next</span>
